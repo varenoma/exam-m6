@@ -13,7 +13,6 @@ from .forms import CustomUserForm
 class HomePage(LoginRequiredMixin, TemplateView):
     template_name = 'accaunt/accaunt_home.html'
 
-    login_url = 'accaunt:signup'
 
 
 class SignUpView(FormView):
