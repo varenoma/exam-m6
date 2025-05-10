@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block title %}
+  {{ detail.full_name }}
+{% endblock %}
+
+{% block content %}
+  <div class="container my-5">
+    <h2 class="text-center text-primary mb-4">{{ detail.full_name }} - Qatagon Ma'lumot</h2>
+
+    <div class="card border-0 shadow">
+      <div class="card-header bg-primary text-white text-center">
+        <h5 class="mb-0">Qatagon Ma'lumotlari</h5>
+      </div>
+
+      <div class="card-body">
+        <h5 class="card-title">{{ detail.full_name }}</h5>
+        <h6 class="card-subtitle text-muted mb-3">Region: {{ detail.region }}</h6>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <p>
+              <strong>Yashagan sanasi:</strong> {{ detail.birth_date }}
+            </p>
+            <p>
+              <strong>Vafot sanasi:</strong> {{ detail.died_date }}
+            </p>
+            <p>
+              <strong>Ayblov:</strong> {{ detail.ayblov }}
+            </p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <p>
+              <strong>Tavsif:</strong> {{ detail.description }}
+            </p>
+          </div>
+        </div>
+
+        <p class="text-muted">
+          <small>Yaratilgan: {{ detail.created_at }}</small>
+        </p>
+      </div>
+
+      <div class="card-footer bg-light text-end">
+        <a href="{% url 'qatagon:home' %}" class="btn btn-outline-primary me-2">Orqaga</a>
+        <a href="{% url 'qatagon:update' detail.pk %}" class="btn btn-warning me-2">Tahrirlash</a>
+        <a href="{% url 'qatagon:delete' detail.pk %}" class="btn btn-danger">O'chirish</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

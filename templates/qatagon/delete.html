@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block title %}
+  Delete: {{ delete.full_name }}
+{% endblock %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="alert alert-danger text-center">
+      <h4 class="mb-3">Haqiqatdan ham "{{ delete.full_name }}" ni o'chirmoqchimisiz?</h4>
+      <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'qatagon:detail' object.pk %}" class="btn btn-secondary">Bekor qilish</a>
+        <button type="submit" class="btn btn-danger">Ha, o'chirilsin</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

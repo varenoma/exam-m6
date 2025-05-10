@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block links %}
+  <link rel="stylesheet" href="{% static 'qatagon/update.css' %}" />
+{% endblock %}
+
+{% block title %}
+  Update: {{ update.full_name }}
+{% endblock %}
+
+{% block content %}
+  <div class="container my-5">
+    <h1 class="text-center mb-4 display-4 fw-bold text-primary">Qatagonni Tahrirlash: {{ qatagon.full_name }}</h1>
+
+    <div class="card shadow-lg border-0 rounded-3 p-4">
+      <form method="POST" class="qatagon-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="d-flex justify-content-end gap-2">
+          <a href="{% url 'qatagon:detail' update.pk %}" class="btn btn-secondary btn-lg px-4">Orqaga qaytish</a>
+          <button type="submit" class="btn btn-success btn-lg px-4">O'zgarishlarni saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
