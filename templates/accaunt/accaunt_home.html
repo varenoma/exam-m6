@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block title %}
+  Accaunt
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    {% if user.is_authenticated %}
+      <h1 class="p-3">Online: {{ user.username }}</h1>
+      <h3><a href="{% url 'accaunt:logout' %}">Chiqish</a></h3>
+    {% else %}
+      <p class="p-5">
+        Signup: <a href="{% url 'accaunt:signup' %}">SignUp</a>
+      </p>
+    {% endif %}
+  </div>
+{% endblock %}

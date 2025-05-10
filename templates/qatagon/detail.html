@@ -48,8 +48,12 @@
 
       <div class="card-footer bg-light text-end">
         <a href="{% url 'qatagon:home' %}" class="btn btn-outline-primary me-2">Orqaga</a>
-        <a href="{% url 'qatagon:update' detail.pk %}" class="btn btn-warning me-2">Tahrirlash</a>
-        <a href="{% url 'qatagon:delete' detail.pk %}" class="btn btn-danger">O'chirish</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'qatagon:update' detail.pk %}" class="btn btn-warning me-2">Tahrirlash</a>
+          <a href="{% url 'qatagon:delete' detail.pk %}" class="btn btn-danger">O'chirish</a>
+        {% else %}
+          <a href="{% url 'accaunt:signup' %}" class="btn btn-warning">Ro'yxatdan o'tish lozim!!!!</a>
+        {% endif %}
       </div>
     </div>
   </div>

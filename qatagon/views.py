@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from qatagon.models import QatagonClass
 
@@ -11,7 +12,6 @@ class ListViewQatagon(ListView):
     model = QatagonClass
     template_name = 'base.html'
     context_object_name = 'qatagon'
-    paginate_by = 10
 
 
 class DetailViewQatagon(DetailView):
@@ -20,7 +20,7 @@ class DetailViewQatagon(DetailView):
     context_object_name = 'detail'
 
 
-class UpdateViewQatagon(UpdateView):
+class UpdateViewQatagon(LoginRequiredMixin, UpdateView):
     model = QatagonClass
     fields = ['full_name', 'birth_date', 'died_date',
               'description', 'region', 'ayblov']
@@ -28,9 +28,13 @@ class UpdateViewQatagon(UpdateView):
     context_object_name = 'update'
     success_url = reverse_lazy('qatagon:home')
 
+    login_url = 'accaunt:signup'
 
-class DeleteViewQatagon(DeleteView):
+
+class DeleteViewQatagon(LoginRequiredMixin, DeleteView):
     model = QatagonClass
     template_name = 'qatagon/delete.html'
     context_object_name = 'delete'
     success_url = reverse_lazy('qatagon:home')
+
+    login_url = 'accaunt:signup'
