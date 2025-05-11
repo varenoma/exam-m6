@@ -10,7 +10,7 @@ from .forms import CustomUserForm
 # Create your views here.
 
 
-class HomePage(LoginRequiredMixin, TemplateView):
+class HomePage(TemplateView):
     template_name = 'accaunt/accaunt_home.html'
 
 

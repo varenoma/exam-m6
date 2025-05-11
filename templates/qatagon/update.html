@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block links %}
@@ -16,7 +17,7 @@
     <div class="card shadow-lg border-0 rounded-3 p-4">
       <form method="POST" class="qatagon-form">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <div class="d-flex justify-content-end gap-2">
           <a href="{% url 'qatagon:detail' update.pk %}" class="btn btn-secondary btn-lg px-4">Orqaga qaytish</a>
           <button type="submit" class="btn btn-success btn-lg px-4">O'zgarishlarni saqlash</button>

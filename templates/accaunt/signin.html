@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +13,7 @@
 
       <form class="card p-5 m-3" method="post" action="">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <button class="btn btn-success" type="submit">Kirish</button>
         <div class="links_div text-center m-3">
           <a class="m-3" href="{% url 'qatagon:home' %}">Bosh sahifa</a>
