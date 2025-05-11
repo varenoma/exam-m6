@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block title %}
+  Qidirish
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="text-center p-5">Qidiruv</h1>
+    <form method="GET" action="{% url 'qatagon:search' %}">
+      <div class="d-flex justify-content-center">
+        <input class="container m-3 p-3" type="text" name="q" value="{{ query }}" placeholder="Qidirish full name bo'yicha" />
+        <button class="btn btn-success p-3 m-3" type="submit">Qidiruv</button>
+        <a class="btn btn-warning p-3 m-3" href="{% url 'qatagon:home' %}">Bosh sahifaga qaytish</a>
+      </div>
+    </form>
+
+    {% if results %}
+      <table class="table table-bordered table-hover">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Toliq ismi</th>
+            <th scope="col">Hududi</th>
+            <th scope="col">Tugilgan sana</th>
+            <th scope="col">Vafot etgan sana</th>
+            <th scope="col">Batafsil</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for q in results %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ q.full_name }}</td>
+              <td>{{ q.region }}</td>
+              <td>{{ q.birth_date }}</td>
+              <td>{{ q.died_date }}</td>
+              <td>
+                <a href="{% url 'qatagon:detail' q.id %}" class="btn btn-primary btn-sm">Korish</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="alert alert-warning" role="alert">Hech narsa topilmadi!!!!</div>
+    {% endif %}
+  </div>
+{% endblock %}

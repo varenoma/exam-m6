@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 from qatagon.models import QatagonClass
 
@@ -38,3 +39,16 @@ class DeleteViewQatagon(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('qatagon:home')
 
     login_url = 'accaunt:signup'
+
+
+def search_view(request):
+    query = request.GET.get('q', '')
+    results = []
+
+    if query:
+        results = QatagonClass.objects.filter(full_name__icontains=query)
+
+    return render(request, 'qatagon/search.html', {
+        'results': results,
+        'query': query,
+    })
